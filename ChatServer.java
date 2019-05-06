@@ -48,28 +48,12 @@ public class ChatServer implements ChatServerInterf{
 		
 		String nick = idCliente.getNickName();
 		
-		if(mensagem.equalsIgnoreCase("[LISTAR]")){
-			String nicks = "";
-			for (ChatClientInterf Cliente : clientes){
-				if(!nicks.equalsIgnoreCase("")){
-					nicks = nicks + ", " + Cliente.getNickName();
-				}
-				else{
-				nicks = Cliente.getNickName();
-				}
+		for(ChatClientInterf Cliente : clientes){
+			if(!Cliente.equals(idCliente)){
+				Cliente.echoMensagem(dtf.format(new Date()) + " - " + nick + " disse: " + mensagem);
 			}
-			idCliente.echoMensagem("Estao na sala os usuarios: " + nicks);
-			System.out.println(dtf.format(new Date()) + " - comando enviado pelo nick " + nick + ": " + mensagem);
 		}
-		else{
-			for(ChatClientInterf Cliente : clientes){
-				if(!Cliente.equals(idCliente)){
-					Cliente.echoMensagem(dtf.format(new Date()) + " - " + nick + " disse: " + mensagem);
-				}
-			}
-			System.out.println(dtf.format(new Date()) + " - mensagem enviada por " + nick + ": " + mensagem);
-		}
-		
+		System.out.println(dtf.format(new Date()) + " - mensagem enviada por " + nick + ": " + mensagem);
 	}
 	
 	//Login
@@ -98,6 +82,4 @@ public class ChatServer implements ChatServerInterf{
 			Cliente.echoMensagem(dtf.format(new Date()) + " - " + obj.getNickName() + " saiu do chat! ");
 		}
 	}
-	
-
 }
