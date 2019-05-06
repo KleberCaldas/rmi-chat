@@ -18,7 +18,7 @@ public class ChatClient{
 		//chamando servidor
 	
 		try{
-			Registry reg = LocateRegistry.getRegistry("152.92.236.11", 9921);
+			Registry reg = LocateRegistry.getRegistry("localhost", 9921);
 			ChatServerInterf stub = (ChatServerInterf) reg.lookup("ServerChatRMI");
 			
 			System.out.println("Digite um nickname para entratar no chat: ");
